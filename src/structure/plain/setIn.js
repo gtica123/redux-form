@@ -1,5 +1,5 @@
 // @flow
-import { toPath } from 'lodash'
+import toPath from 'lodash.topath'
 
 const setInWithPath = (
   state: Object | Array<any>,

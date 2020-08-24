@@ -1,5 +1,5 @@
 // @flow
-import { toPath } from 'lodash'
+import toPath from 'lodash.topath'
 import type { Structure } from './types'
 
 type ShouldDelete<SDM, SDL> = (
@@ -9,10 +9,8 @@ type ShouldDelete<SDM, SDL> = (
 type DeleteInWithCleanup<DIM, DIL> = (DIM | DIL, string) => DIM | DIL
 
 function createDeleteInWithCleanUp<DIM, DIL>(structure: Structure<DIM, DIL>) {
-  const shouldDeleteDefault: ShouldDelete<DIM, DIL> = structure => (
-    state,
-    path
-  ) => structure.getIn(state, path) !== undefined
+  const shouldDeleteDefault: ShouldDelete<DIM, DIL> = structure => (state, path) =>
+    structure.getIn(state, path) !== undefined
 
   const { deepEqual, empty, getIn, deleteIn, setIn } = structure
 

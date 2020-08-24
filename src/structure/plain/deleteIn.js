@@ -1,5 +1,5 @@
 // @flow
-import { toPath } from 'lodash'
+import toPath from 'lodash.topath'
 
 function deleteInWithPath<T: Object | Array<any>>(
   state: ?T,

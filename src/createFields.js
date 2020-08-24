@@ -2,7 +2,7 @@
 import { Component, createElement, createRef } from 'react'
 import PropTypes from 'prop-types'
 import invariant from 'invariant'
-import get from 'lodash/get'
+import get from 'lodash.get'
 import createConnectedFields from './ConnectedFields'
 import shallowCompare from './util/shallowCompare'
 import plain from './structure/plain'

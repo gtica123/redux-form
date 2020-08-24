@@ -1,7 +1,7 @@
 // @flow
 import type { List as ImmutableList, Map as ImmutableMap } from 'immutable'
 import { fromJS, Iterable, List, Map } from 'immutable'
-import { toPath } from 'lodash'
+import toPath from 'lodash.topath'
 import type { Structure } from '../../types'
 import plainGetIn from '../plain/getIn'
 import deepEqual from './deepEqual'

@@ -1,7 +1,8 @@
 // @flow
 import { Iterable } from 'immutable'
 
-import { isEqualWith, isNil } from 'lodash'
+import isEqualWith from 'lodash.isequalwith'
+import isNil from 'lodash.isnil'
 
 const isEmpty = (obj: any) => {
   return isNil(obj) || obj === '' || isNaN(obj)

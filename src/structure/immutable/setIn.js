@@ -1,6 +1,6 @@
 // @flow
 import { List, Map } from 'immutable'
-import { toPath } from 'lodash'
+import toPath from 'lodash.topath'
 import type { Map as ImmutableMap, List as ImmutableList } from 'immutable'
 
 const arrayPattern = /\[(\d+)\]/

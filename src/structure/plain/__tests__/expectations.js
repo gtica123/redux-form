@@ -1,5 +1,6 @@
 // @flow
-import { isEqual, isObject } from 'lodash'
+import isObject from 'lodash.isobject'
+import isEqual from 'lodash.isequal'
 
 const expectations = {
   toBeAMap(actual: any) {
