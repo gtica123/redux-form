@@ -40,7 +40,7 @@ import {
 import createDeleteInWithCleanUp from './deleteInWithCleanUp'
 import plain from './structure/plain'
 import type { Action, Structure } from './types.js.flow'
-import isFunction from 'lodash.isFunction'
+import isFunction from 'lodash.isfunction'
 
 const shouldDelete = ({ getIn }) => (state, path) => {
   let initialValuesPath = null
