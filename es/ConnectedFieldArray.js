@@ -1,12 +1,12 @@
 import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
 import _createClass from "@babel/runtime/helpers/createClass";
 import _inheritsLoose from "@babel/runtime/helpers/inheritsLoose";
-import _mapValues from "lodash/mapValues";
 import React, { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import createFieldArrayProps from './createFieldArrayProps';
+import mapValues from 'lodash.mapvalues';
 import plain from './structure/plain';
 import validateComponentProp from './util/validateComponentProp';
 var propsToNotUpdateFor = ['_reduxForm', 'value'];
@@ -177,7 +177,7 @@ export default function createConnectedFieldArray(structure) {
         arraySplice = _reduxForm.arraySplice,
         arraySwap = _reduxForm.arraySwap,
         arrayUnshift = _reduxForm.arrayUnshift;
-    return _mapValues({
+    return mapValues({
       arrayInsert: arrayInsert,
       arrayMove: arrayMove,
       arrayPop: arrayPop,
