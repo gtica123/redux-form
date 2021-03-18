@@ -90,10 +90,11 @@ var handleSubmit = function handleSubmit(submit, props, valid, asyncValidate, fi
       syncErrors = props.syncErrors,
       asyncErrors = props.asyncErrors,
       touch = props.touch,
-      persistentSubmitErrors = props.persistentSubmitErrors;
+      persistentSubmitErrors = props.persistentSubmitErrors,
+      persistentErrors = props.persistentErrors;
   touch.apply(void 0, fields);
 
-  if (valid || persistentSubmitErrors) {
+  if (valid || persistentSubmitErrors || persistentErrors) {
     var asyncValidateResult = asyncValidate && asyncValidate();
 
     if (asyncValidateResult) {

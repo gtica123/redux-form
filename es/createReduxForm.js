@@ -85,6 +85,7 @@ export default function createReduxForm(structure) {
     var config = _extends({
       touchOnBlur: true,
       touchOnChange: false,
+      persistentErrors: false,
       persistentSubmitErrors: false,
       destroyOnUnmount: true,
       shouldAsyncValidate: defaultShouldAsyncValidate,
@@ -641,6 +642,7 @@ export default function createReduxForm(structure) {
               touch = _this$props12.touch,
               touchOnBlur = _this$props12.touchOnBlur,
               touchOnChange = _this$props12.touchOnChange,
+              persistentErrors = _this$props12.persistentErrors,
               persistentSubmitErrors = _this$props12.persistentSubmitErrors,
               syncErrors = _this$props12.syncErrors,
               syncWarnings = _this$props12.syncWarnings,
@@ -652,7 +654,7 @@ export default function createReduxForm(structure) {
               validExceptSubmit = _this$props12.validExceptSubmit,
               values = _this$props12.values,
               warning = _this$props12.warning,
-              rest = _objectWithoutPropertiesLoose(_this$props12, ["anyTouched", "array", "arrayInsert", "arrayMove", "arrayPop", "arrayPush", "arrayRemove", "arrayRemoveAll", "arrayShift", "arraySplice", "arraySwap", "arrayUnshift", "asyncErrors", "asyncValidate", "asyncValidating", "blur", "change", "clearSubmit", "destroy", "destroyOnUnmount", "forceUnregisterOnUnmount", "dirty", "dispatch", "enableReinitialize", "error", "focus", "form", "getFormState", "immutableProps", "initialize", "initialized", "initialValues", "invalid", "keepDirtyOnReinitialize", "keepValues", "updateUnregisteredFields", "pristine", "propNamespace", "registeredFields", "registerField", "reset", "resetSection", "setSubmitFailed", "setSubmitSucceeded", "shouldAsyncValidate", "shouldValidate", "shouldError", "shouldWarn", "startAsyncValidation", "startSubmit", "stopAsyncValidation", "stopSubmit", "submitAsSideEffect", "submitting", "submitFailed", "submitSucceeded", "touch", "touchOnBlur", "touchOnChange", "persistentSubmitErrors", "syncErrors", "syncWarnings", "unregisterField", "untouch", "updateSyncErrors", "updateSyncWarnings", "valid", "validExceptSubmit", "values", "warning"]);
+              rest = _objectWithoutPropertiesLoose(_this$props12, ["anyTouched", "array", "arrayInsert", "arrayMove", "arrayPop", "arrayPush", "arrayRemove", "arrayRemoveAll", "arrayShift", "arraySplice", "arraySwap", "arrayUnshift", "asyncErrors", "asyncValidate", "asyncValidating", "blur", "change", "clearSubmit", "destroy", "destroyOnUnmount", "forceUnregisterOnUnmount", "dirty", "dispatch", "enableReinitialize", "error", "focus", "form", "getFormState", "immutableProps", "initialize", "initialized", "initialValues", "invalid", "keepDirtyOnReinitialize", "keepValues", "updateUnregisteredFields", "pristine", "propNamespace", "registeredFields", "registerField", "reset", "resetSection", "setSubmitFailed", "setSubmitSucceeded", "shouldAsyncValidate", "shouldValidate", "shouldError", "shouldWarn", "startAsyncValidation", "startSubmit", "stopAsyncValidation", "stopSubmit", "submitAsSideEffect", "submitting", "submitFailed", "submitSucceeded", "touch", "touchOnBlur", "touchOnChange", "persistentErrors", "persistentSubmitErrors", "syncErrors", "syncWarnings", "unregisterField", "untouch", "updateSyncErrors", "updateSyncWarnings", "valid", "validExceptSubmit", "values", "warning"]);
           /* eslint-enable no-unused-vars */
 
 
@@ -736,6 +738,7 @@ export default function createReduxForm(structure) {
         touchOnBlur: PropTypes.bool,
         touchOnChange: PropTypes.bool,
         triggerSubmit: PropTypes.bool,
+        persistentErrors: PropTypes.bool,
         persistentSubmitErrors: PropTypes.bool,
         registeredFields: PropTypes.any
       };
@@ -811,7 +814,7 @@ export default function createReduxForm(structure) {
         };
 
         var boundChange = function boundChange(field, value) {
-          return change(initialProps.form, field, value, !!initialProps.touchOnChange, !!initialProps.persistentSubmitErrors);
+          return change(initialProps.form, field, value, !!initialProps.touchOnChange, !!initialProps.persistentSubmitErrors, !!initialProps.persistentErrors);
         };
 
         var boundFocus = bindForm(focus); // Wrap action creators with `dispatch`

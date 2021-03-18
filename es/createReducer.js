@@ -184,6 +184,7 @@ function createReducer(structure) {
         field = _ref14$meta.field,
         touch = _ref14$meta.touch,
         persistentSubmitErrors = _ref14$meta.persistentSubmitErrors,
+        persistentErrors = _ref14$meta.persistentErrors,
         payload = _ref14.payload;
     var result = state;
     var initial = getIn(result, "initial." + field);
@@ -197,7 +198,9 @@ function createReducer(structure) {
       result = setIn(result, "values." + field, payload);
     }
 
-    result = deleteInWithCleanUp(result, "asyncErrors." + field);
+    if (!persistentErrors) {
+      result = deleteInWithCleanUp(result, "asyncErrors." + field);
+    }
 
     if (!persistentSubmitErrors) {
       result = deleteInWithCleanUp(result, "submitErrors." + field);
@@ -225,10 +228,13 @@ function createReducer(structure) {
     var _ref16$meta = _ref16.meta,
         keepTouched = _ref16$meta.keepTouched,
         persistentSubmitErrors = _ref16$meta.persistentSubmitErrors,
+        persistentErrors = _ref16$meta.persistentErrors,
         fields = _ref16$meta.fields;
     var result = state;
     fields.forEach(function (field) {
-      result = deleteInWithCleanUp(result, "asyncErrors." + field);
+      if (!persistentErrors) {
+        result = deleteInWithCleanUp(result, "asyncErrors." + field);
+      }
 
       if (!persistentSubmitErrors) {
         result = deleteInWithCleanUp(result, "submitErrors." + field);

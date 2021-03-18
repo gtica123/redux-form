@@ -14135,14 +14135,15 @@ var blur = function blur(form, field, value, touch) {
   };
 };
 
-var change = function change(form, field, value, touch, persistentSubmitErrors) {
+var change = function change(form, field, value, touch, persistentSubmitErrors, persistentErrors) {
   return {
     type: _actionTypes.CHANGE,
     meta: {
       form: form,
       field: field,
       touch: touch,
-      persistentSubmitErrors: persistentSubmitErrors
+      persistentSubmitErrors: persistentSubmitErrors,
+      persistentErrors: persistentErrors
     },
     payload: value
   };
@@ -15670,6 +15671,7 @@ function createReducer(structure) {
         field = _ref14$meta.field,
         touch = _ref14$meta.touch,
         persistentSubmitErrors = _ref14$meta.persistentSubmitErrors,
+        persistentErrors = _ref14$meta.persistentErrors,
         payload = _ref14.payload;
     var result = state;
     var initial = getIn(result, "initial." + field);
@@ -15683,7 +15685,9 @@ function createReducer(structure) {
       result = setIn(result, "values." + field, payload);
     }
 
-    result = deleteInWithCleanUp(result, "asyncErrors." + field);
+    if (!persistentErrors) {
+      result = deleteInWithCleanUp(result, "asyncErrors." + field);
+    }
 
     if (!persistentSubmitErrors) {
       result = deleteInWithCleanUp(result, "submitErrors." + field);
@@ -15711,10 +15715,13 @@ function createReducer(structure) {
     var _ref16$meta = _ref16.meta,
         keepTouched = _ref16$meta.keepTouched,
         persistentSubmitErrors = _ref16$meta.persistentSubmitErrors,
+        persistentErrors = _ref16$meta.persistentErrors,
         fields = _ref16$meta.fields;
     var result = state;
     fields.forEach(function (field) {
-      result = deleteInWithCleanUp(result, "asyncErrors." + field);
+      if (!persistentErrors) {
+        result = deleteInWithCleanUp(result, "asyncErrors." + field);
+      }
 
       if (!persistentSubmitErrors) {
         result = deleteInWithCleanUp(result, "submitErrors." + field);
@@ -16332,6 +16339,7 @@ function createReduxForm(structure) {
     var config = (0, _extends2["default"])({
       touchOnBlur: true,
       touchOnChange: false,
+      persistentErrors: false,
       persistentSubmitErrors: false,
       destroyOnUnmount: true,
       shouldAsyncValidate: _defaultShouldAsyncValidate["default"],
@@ -16887,6 +16895,7 @@ function createReduxForm(structure) {
               touch = _this$props12.touch,
               touchOnBlur = _this$props12.touchOnBlur,
               touchOnChange = _this$props12.touchOnChange,
+              persistentErrors = _this$props12.persistentErrors,
               persistentSubmitErrors = _this$props12.persistentSubmitErrors,
               syncErrors = _this$props12.syncErrors,
               syncWarnings = _this$props12.syncWarnings,
@@ -16898,7 +16907,7 @@ function createReduxForm(structure) {
               validExceptSubmit = _this$props12.validExceptSubmit,
               values = _this$props12.values,
               warning = _this$props12.warning,
-              rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props12, ["anyTouched", "array", "arrayInsert", "arrayMove", "arrayPop", "arrayPush", "arrayRemove", "arrayRemoveAll", "arrayShift", "arraySplice", "arraySwap", "arrayUnshift", "asyncErrors", "asyncValidate", "asyncValidating", "blur", "change", "clearSubmit", "destroy", "destroyOnUnmount", "forceUnregisterOnUnmount", "dirty", "dispatch", "enableReinitialize", "error", "focus", "form", "getFormState", "immutableProps", "initialize", "initialized", "initialValues", "invalid", "keepDirtyOnReinitialize", "keepValues", "updateUnregisteredFields", "pristine", "propNamespace", "registeredFields", "registerField", "reset", "resetSection", "setSubmitFailed", "setSubmitSucceeded", "shouldAsyncValidate", "shouldValidate", "shouldError", "shouldWarn", "startAsyncValidation", "startSubmit", "stopAsyncValidation", "stopSubmit", "submitAsSideEffect", "submitting", "submitFailed", "submitSucceeded", "touch", "touchOnBlur", "touchOnChange", "persistentSubmitErrors", "syncErrors", "syncWarnings", "unregisterField", "untouch", "updateSyncErrors", "updateSyncWarnings", "valid", "validExceptSubmit", "values", "warning"]);
+              rest = (0, _objectWithoutPropertiesLoose2["default"])(_this$props12, ["anyTouched", "array", "arrayInsert", "arrayMove", "arrayPop", "arrayPush", "arrayRemove", "arrayRemoveAll", "arrayShift", "arraySplice", "arraySwap", "arrayUnshift", "asyncErrors", "asyncValidate", "asyncValidating", "blur", "change", "clearSubmit", "destroy", "destroyOnUnmount", "forceUnregisterOnUnmount", "dirty", "dispatch", "enableReinitialize", "error", "focus", "form", "getFormState", "immutableProps", "initialize", "initialized", "initialValues", "invalid", "keepDirtyOnReinitialize", "keepValues", "updateUnregisteredFields", "pristine", "propNamespace", "registeredFields", "registerField", "reset", "resetSection", "setSubmitFailed", "setSubmitSucceeded", "shouldAsyncValidate", "shouldValidate", "shouldError", "shouldWarn", "startAsyncValidation", "startSubmit", "stopAsyncValidation", "stopSubmit", "submitAsSideEffect", "submitting", "submitFailed", "submitSucceeded", "touch", "touchOnBlur", "touchOnChange", "persistentErrors", "persistentSubmitErrors", "syncErrors", "syncWarnings", "unregisterField", "untouch", "updateSyncErrors", "updateSyncWarnings", "valid", "validExceptSubmit", "values", "warning"]);
           /* eslint-enable no-unused-vars */
 
           var reduxFormProps = (0, _extends2["default"])({
@@ -16980,6 +16989,7 @@ function createReduxForm(structure) {
         touchOnBlur: _propTypes["default"].bool,
         touchOnChange: _propTypes["default"].bool,
         triggerSubmit: _propTypes["default"].bool,
+        persistentErrors: _propTypes["default"].bool,
         persistentSubmitErrors: _propTypes["default"].bool,
         registeredFields: _propTypes["default"].any
       };
@@ -17058,7 +17068,7 @@ function createReduxForm(structure) {
         };
 
         var boundChange = function boundChange(field, value) {
-          return change(initialProps.form, field, value, !!initialProps.touchOnChange, !!initialProps.persistentSubmitErrors);
+          return change(initialProps.form, field, value, !!initialProps.touchOnChange, !!initialProps.persistentSubmitErrors, !!initialProps.persistentErrors);
         };
 
         var boundFocus = bindForm(focus); // Wrap action creators with `dispatch`
@@ -18076,10 +18086,11 @@ var handleSubmit = function handleSubmit(submit, props, valid, asyncValidate, fi
       syncErrors = props.syncErrors,
       asyncErrors = props.asyncErrors,
       touch = props.touch,
-      persistentSubmitErrors = props.persistentSubmitErrors;
+      persistentSubmitErrors = props.persistentSubmitErrors,
+      persistentErrors = props.persistentErrors;
   touch.apply(void 0, fields);
 
-  if (valid || persistentSubmitErrors) {
+  if (valid || persistentSubmitErrors || persistentErrors) {
     var asyncValidateResult = asyncValidate && asyncValidate();
 
     if (asyncValidateResult) {

@@ -114,7 +114,8 @@ export type Change = {
     field: string,
     value: any,
     touch?: boolean,
-    persistentSubmitErrors?: boolean
+    persistentSubmitErrors?: boolean,
+    persistentErrors?: boolean
   ): ChangeAction
 }
 export type ClearSubmitAction = {
@@ -148,6 +149,7 @@ export type ClearFields = {
     form: string,
     keepTouched: boolean,
     persistentSubmitErrors: boolean,
+    persistentErrors: boolean,
     ...fields: string[]
   ): ClearFieldsAction
 }
