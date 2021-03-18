@@ -1,7 +1,7 @@
 // @flow
-import isEmpty from 'lodash.isEmpty'
-import isEqual from 'lodash.isEqual'
-import mapValues from 'lodash.mapValues'
+import isEmpty from 'lodash.isempty'
+import isEqual from 'lodash.isequal'
+import mapValues from 'lodash.mapvalues'
 import React from 'react'
 import { connect } from 'react-redux'
 import prefixName from './util/prefixName'

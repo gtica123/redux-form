@@ -2,7 +2,7 @@
 import hoistStatics from 'hoist-non-react-statics'
 import invariant from 'invariant'
 import isPromise from 'is-promise'
-import mapValues from 'lodash.mapValues'
+import mapValues from 'lodash.mapvalues'
 import merge from 'lodash.merge'
 import PropTypes from 'prop-types'
 import React, { createElement } from 'react'

@@ -6097,6 +6097,42 @@ declare module "lodash/fp/uniqueId" {
   declare module.exports: $PropertyType<$Exports<"lodash/fp">, "uniqueId">;
 }
 
+declare module "lodash.get" {
+  declare module.exports: $PropertyType<$Exports<"lodash">, "get">;
+}
+
+declare module "lodash.isempty" {
+  declare module.exports: $PropertyType<$Exports<"lodash">, "isEmpty">;
+}
+
+declare module "lodash.isequal" {
+  declare module.exports: $PropertyType<$Exports<"lodash">, "isEqual">;
+}
+
+declare module "lodash.isequalwith" {
+  declare module.exports: $PropertyType<$Exports<"lodash">, "isEqualWith">;
+}
+
 declare module "lodash.isfunction" {
   declare module.exports: $PropertyType<$Exports<"lodash">, "isFunction">;
+}
+
+declare module "lodash.isnil" {
+  declare module.exports: $PropertyType<$Exports<"lodash">, "isNil">;
+}
+
+declare module "lodash.isobject" {
+  declare module.exports: $PropertyType<$Exports<"lodash">, "isObject">;
+}
+
+declare module "lodash.mapvalues" {
+  declare module.exports: $PropertyType<$Exports<"lodash">, "mapValues">;
+}
+
+declare module "lodash.merge" {
+  declare module.exports: $PropertyType<$Exports<"lodash">, "merge">;
+}
+
+declare module "lodash.topath" {
+  declare module.exports: $PropertyType<$Exports<"lodash">, "toPath">;
 }
